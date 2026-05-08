@@ -1,0 +1,21 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Flightradar Nearby einrichten",
+        "description": "Gib den Standort und Radius an, in dem Flüge angezeigt werden sollen.",
+        "data": {
+          "latitude": "Breitengrad",
+          "longitude": "Längengrad",
+          "radius": "Radius (km)",
+          "scan_interval": "Aktualisierungsintervall (Sekunden)"
+        }
+      }
+    },
+    "error": {
+      "invalid_latitude": "Ungültiger Breitengrad (-90 bis 90)",
+      "invalid_longitude": "Ungültiger Längengrad (-180 bis 180)",
+      "invalid_radius": "Radius muss größer als 0 sein"
+    }
+  }
+}

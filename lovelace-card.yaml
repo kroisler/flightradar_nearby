@@ -1,0 +1,76 @@
+# ============================================================================
+# Flightradar Nearby – Lovelace Dashboard Card
+# ============================================================================
+# Füge diese Card in dein Dashboard ein.
+# Voraussetzung: Die Integration "Flightradar Nearby" ist eingerichtet.
+#
+# Option 1: Einfache Entities-Card
+# Option 2: Markdown-Card mit Flugtabelle
+# Option 3: Custom Card (auto-entities + template)
+# ============================================================================
+
+# --- Option 1: Einfache Übersicht ---
+type: entities
+title: ✈️ Flüge in der Nähe
+entities:
+  - entity: sensor.fluge_in_der_nahe
+    name: Anzahl Flüge
+  - type: attribute
+    entity: sensor.flightradar_fluge
+    attribute: nearest_flight
+    name: Nächster Flug
+  - type: attribute
+    entity: sensor.flightradar_fluge
+    attribute: nearest_airline
+    name: Airline
+  - type: attribute
+    entity: sensor.flightradar_fluge
+    attribute: nearest_origin
+    name: Von
+  - type: attribute
+    entity: sensor.flightradar_fluge
+    attribute: nearest_destination
+    name: Nach
+  - type: attribute
+    entity: sensor.flightradar_fluge
+    attribute: nearest_distance_km
+    name: Entfernung
+    suffix: " km"
+
+---
+
+# --- Option 2: Markdown-Card mit Flugtabelle ---
+type: markdown
+title: ✈️ Flüge im Umkreis
+content: >
+  {% set flights = state_attr('sensor.flightradar_fluge', 'flights') %}
+  {% if flights and flights | length > 0 %}
+  | Flug | Airline | Von | Nach | Abflug | Ankunft | Typ | Dist |
+  |------|---------|-----|------|--------|---------|-----|------|
+  {% for f in flights[:15] %}
+  | {{ f.flight_number }} | {{ f.airline }} | {{ f.origin_iata or f.origin_airport }} | {{ f.destination_iata or f.destination_airport }} | {{ f.departure_time or '?' }} | {{ f.arrival_time or '?' }} | {{ f.aircraft_type }} | {{ f.distance_km }}km |
+  {% endfor %}
+  {% else %}
+  Keine Flüge im Umkreis.
+  {% endif %}
+
+---
+
+# --- Option 3: Kompakte Ansicht mit Conditional ---
+type: vertical-stack
+cards:
+  - type: custom:mushroom-entity-card
+    entity: sensor.fluge_in_der_nahe
+    name: Flüge im Umkreis
+    icon: mdi:airplane
+    layout: horizontal
+
+  - type: markdown
+    content: >
+      {% set flights = state_attr('sensor.flightradar_fluge', 'flights') %}
+      {% if flights %}
+      {% for f in flights[:10] %}
+      **{{ f.flight_number }}** ({{ f.airline }}) · {{ f.aircraft_type }}
+      {{ f.origin_iata }} → {{ f.destination_iata }} · ↑{{ f.departure_time or '?' }} ↓{{ f.arrival_time or '?' }} · {{ f.distance_km }}km · {{ f.altitude }}ft
+      {% endfor %}
+      {% endif %}
