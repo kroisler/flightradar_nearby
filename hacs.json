@@ -1,6 +1,6 @@
 {
   "name": "Flightradar Nearby",
-  "content_in_root": false,
-  "zip_release": false,
+  "zip_release": true,
+  "filename": "flightradar_nearby.zip",
   "render_readme": true
 }
