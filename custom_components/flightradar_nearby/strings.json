@@ -1,0 +1,21 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Set up Flightradar Nearby",
+        "description": "Enter the location and radius to track nearby flights.",
+        "data": {
+          "latitude": "Latitude",
+          "longitude": "Longitude",
+          "radius": "Radius (km)",
+          "scan_interval": "Update interval (seconds)"
+        }
+      }
+    },
+    "error": {
+      "invalid_latitude": "Invalid latitude (-90 to 90)",
+      "invalid_longitude": "Invalid longitude (-180 to 180)",
+      "invalid_radius": "Radius must be greater than 0"
+    }
+  }
+}
