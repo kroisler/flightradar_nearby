@@ -1,12 +1,12 @@
 {
   "domain": "flightradar_nearby",
   "name": "Flightradar Nearby",
-  "codeowners": ["@florianraedler"],
+  "codeowners": ["@kroisler"],
   "config_flow": true,
   "dependencies": [],
-  "documentation": "https://github.com/florianraedler/flightradar_nearby",
+  "documentation": "https://github.com/kroisler/flightradar_nearby",
   "iot_class": "cloud_polling",
-  "issue_tracker": "https://github.com/florianraedler/flightradar_nearby/issues",
+  "issue_tracker": "https://github.com/kroisler/flightradar_nearby/issues",
   "requirements": ["FlightRadarAPI==1.3.7"],
   "version": "1.0.0"
 }
